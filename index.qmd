@@ -1,0 +1,20 @@
+---
+title: "Listen to Zvenigorod K and S"
+format: html
+editor: source
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, echo=FALSE, message=FALSE}
+library(tidyverse)
+df <- read_csv("result.csv")
+
+df %>% 
+  mutate(audio = str_c("audio/", id, ".wav"),
+         audio = glue::glue('<audio controls="" preload="none"><source src="{audio}" type="audio/ogg"></audio> ')) %>% 
+  select(-id, -token) %>% 
+  DT::datatable(escape = FALSE, rownames = FALSE)
+```
+
+
